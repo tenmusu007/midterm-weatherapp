@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./scss/index.css">
+    <title>Weather App</title>
+        <script src="https://maps.googleapis.com/maps/api/js?language=en&key=AIzaSyAekDQRLB4ssUOeTr0dBtOsqowdFwmnQdo&libraries=places" async > 
+    </script>
+</head>
+<body>
+    <section>
+        <input id="autocomplete" placeholder="Enter a place" type="text">
+        <select class="fav-list" id="">
+            <option value="none" id="Favoption">Fav</option>
+        </select>
+        <button class="fav-btn">Favorite</button>
+    </section>
+    <section>
+        <div class="container-current">
+        </div>
+    </section>
+    <script type="module" src="./apikey.js"></script>
+    <!-- <script type="module" src="js/inputver2.js"></script> -->
+    <script type="module" src="js/input.js"></script>
+    <script type="module" src="js/index.js"></script>
+    <script type="module" src="js/atsu.js"></script>
+    <!-- <script type="module" src="js/asafe.js"></script> -->
+</body>
+</html>
