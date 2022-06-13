@@ -19,7 +19,7 @@ function MainDataFunction() {
       const daysCast = []
       const hoursCast = []   
           
-      console.log(data.list);
+      // console.log(data.list);
       for (let i = 0; i < data.list.length; i += 8) {
           daysCast.push(data.list[i])
       }
