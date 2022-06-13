@@ -89,6 +89,29 @@
   }
 }
 
+.continer-flex {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+    margin: 2em;
+}
+
+.hours-weather {
+    border: 0.1em solid black ;
+    width: 10em;
+    padding: 0 auto;
+}
+
+.days-weather {
+    border: 0.1em solid black ;
+    width: 10em;
+    padding: 0 auto;
+}
+
+.weather-icon {
+    margin-left: 1.5em;
+}
+
 * {
   margin: 0;
   padding: 0;
