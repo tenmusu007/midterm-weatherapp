@@ -1,5 +1,6 @@
-import { gettingData } from "./index.js";
+import { gettingData,gettingDataFor } from "./index.js";
 import { renderHtml } from './atsu.js'
+import { create3hourHtml, createHtml} from "./asafe.js";
 export let placeName = "";
 let favorite = []
 let nameForStrage = "";
@@ -19,12 +20,12 @@ favBtn.addEventListener("click", () => {
     favorite.push(nameForStrage)
     testArray.push(nameForStrage)
     console.log(testArray);
-    if(checkLs){
-    }else{
-        const filterFav = testArray.filter((item)=>{
-            if(testArray === item){
+    if (checkLs) {
+    } else {
+        const filterFav = testArray.filter((item) => {
+            if (testArray === item) {
                 return console.log("match")
-            }else{
+            } else {
                 console.log("Not match");
             }
         })
@@ -75,7 +76,7 @@ function initAutocomplete() {
 document.addEventListener("DOMContentLoaded", initAutocomplete);
 function onPlaceChanged() {
     var place = autocomplete.getPlace();
-    console.log(place);
+    // console.log(place);
     // console.log(place.place_id)
 
     if (!place.geometry) {
@@ -87,6 +88,9 @@ function onPlaceChanged() {
         // favOption.innerHTML = getGglName(nameForStrage)
         gettingData(placeName).then((item) => {
             document.getElementById("current-weather-div").innerHTML = renderHtml(item)
+        })
+        gettingDataFor(placeName).then((data) => {
+            console.log(data);
         })
     }
 }
