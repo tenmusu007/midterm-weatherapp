@@ -23,7 +23,6 @@ export const renderHtml =(arg)=>{
                         <p class ="current-mintemp">L ${item.main.temp_min}</p>
                     </div>
                     <p class ="current-humidity"> Humidity : ${item.main.humidity}%</p>
-                    <p class ="current-weather">${item.weather[0].main} </p> 
                 </div>
                 `
                 )
