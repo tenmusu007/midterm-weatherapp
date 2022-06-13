@@ -1,5 +1,6 @@
-import { gettingData } from "./index.js";
+import { gettingData,gettingDataFor } from "./index.js";
 import { renderHtml } from './atsu.js'
+import { create3hourHtml, createHtml} from "./asafe.js";
 export let placeName = "";
 let nameForStrage = "";
 let checkArray = []
@@ -12,6 +13,18 @@ favBtn.addEventListener("click", () => {
     const option = document.createElement("option")
     option.setAttribute("id", "test")
     favorite.push(nameForStrage)
+    testArray.push(nameForStrage)
+    console.log(testArray);
+    if (checkLs) {
+    } else {
+        const filterFav = testArray.filter((item) => {
+            if (testArray === item) {
+                return console.log("match")
+            } else {
+                console.log("Not match");
+            }
+        })
+
     console.log("favorite " + favorite)
     if (checkLs) {
         console.log("LS :", checkLs);
@@ -86,6 +99,7 @@ function initAutocomplete() {
 document.addEventListener("DOMContentLoaded", initAutocomplete);
 function onPlaceChanged() {
     var place = autocomplete.getPlace();
+
     if (!place.geometry) {
         document.getElementById('autocomplete').placeholder = 'Enter a place';
     } else {
@@ -94,6 +108,9 @@ function onPlaceChanged() {
         placeName = place.name.toLowerCase()
         gettingData(placeName).then((item) => {
             document.getElementById("current-weather-div").innerHTML = renderHtml(item)
+        })
+        gettingDataFor(placeName).then((data) => {
+            console.log(data);
         })
     }
 }
