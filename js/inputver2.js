@@ -1,60 +1,75 @@
 import { gettingData } from "./index.js";
 import { renderHtml } from './atsu.js'
 export let placeName = "";
-let favorite = []
 let nameForStrage = "";
-const testArray = []
+let checkArray = []
 const favBtn = document.getElementsByClassName("fav-btn")[0]
 const select = document.getElementsByClassName("fav-list")[0]
+localStorage.setItem("favlist", [])
+const favorite = []
 favBtn.addEventListener("click", () => {
-    localStorage.setItem("favlist", [])
     let checkLs = localStorage.getItem("favlist")
-    console.log("LS :", checkLs);
     const option = document.createElement("option")
     option.setAttribute("id", "test")
-    select.appendChild(option)
-    renderOption(nameForStrage).forEach(element => {
-        option.innerHTML = element
-    });
     favorite.push(nameForStrage)
-    testArray.push(nameForStrage)
-    console.log(testArray);
-    if(checkLs){
-    }else{
-        const filterFav = testArray.filter((item)=>{
-            if(testArray === item){
-                return console.log("match")
-            }else{
-                console.log("Not match");
-            }
-        })
+    console.log("favorite " + favorite)
+    if (checkLs) {
+        console.log("LS :", checkLs);
+        if (!checkArray.includes(nameForStrage)) {
+            checkArray.push(nameForStrage)
+            console.log("Not match");
+            console.log("checkArray " + checkArray)
+            select.appendChild(option)
+            renderOption(checkArray).forEach(element => {
+                console.log(element);
+                option.innerHTML =  element
+            });
+            localStorage.setItem("favlist", checkArray)
+        } else {
+            console.log(checkArray);
+            console.log("match");
+            const checkLs = checkArray.filter((item)=>{
+                if(nameForStrage !== item){
+                    return item
+                }
+            })
+            console.log(checkLs);
+            select.innerHTML = " "
+            const option2 = document.createElement("option")
+            const favOpt = document.createElement("option")
+            favOpt.innerHTML = `Fav`
+            select.appendChild(favOpt)
+            select.appendChild(option2)
+            renderOption(checkLs).forEach(element => {
+                console.log(element);
+                select.innerHTML = `<option value="none" id="Favoption">Fav</option> ${element}`
+            });
+            localStorage.setItem("favlist", checkLs)
+            checkArray = checkLs
+            
+        }
+    } else {
+        console.log("else");
+        checkArray.push(nameForStrage)
+        localStorage.setItem("favlist", checkArray)
+        renderOption(checkArray).forEach(element => {
+            select.innerHTML = `<option value="none" id="Favoption">Fav</option>
+            ${element}`
+        });
     }
-    // if()
-    // let inputName = localStorage.getItem("cityname")
-    // if(favorite.length > 0){
-    //     if(!favorite.includes(inputName)){
-
-    //         });
-    //         console.log(select)
-    //     }else{
-
-    //         return 
-    //     }
-    // }else{
-
-    // }
 })
 
 const renderOption = (name) => {
-    console.log(name);
-    const optionHtml = Array(name).map((item) => {
-        return (
+    // console.log(name);
+    const optionHtml = name.map((item) => {
+        // console.log(item);
+        return(
             `
-            <option id="name">${item}<option>
+            <option value="" key="">${item}</option>
             `
-        )
+            )
     })
-    // console.log(optionHtml);
+    console.log(optionHtml);
     return optionHtml
 }
 
@@ -65,26 +80,18 @@ function initAutocomplete() {
         document.getElementById('autocomplete'),
         {
             types: ['(cities)'],
-            // tyeps:['establishment'],
-            // componentRestrictions:{'country': ['AU']},
-            // fields: ['name']
         });
     autocomplete.addListener('place_changed', onPlaceChanged)
-    // console.log(autocomplete);
 }
 document.addEventListener("DOMContentLoaded", initAutocomplete);
 function onPlaceChanged() {
     var place = autocomplete.getPlace();
-    console.log(place);
-    // console.log(place.place_id)
-
     if (!place.geometry) {
         document.getElementById('autocomplete').placeholder = 'Enter a place';
     } else {
         nameForStrage = place.name
         localStorage.setItem("cityname", nameForStrage)
         placeName = place.name.toLowerCase()
-        // favOption.innerHTML = getGglName(nameForStrage)
         gettingData(placeName).then((item) => {
             document.getElementById("current-weather-div").innerHTML = renderHtml(item)
         })
