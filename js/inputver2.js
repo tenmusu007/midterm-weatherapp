@@ -60,9 +60,7 @@ favBtn.addEventListener("click", () => {
 })
 
 const renderOption = (name) => {
-    // console.log(name);
     const optionHtml = name.map((item) => {
-        // console.log(item);
         return(
             `
             <option value="" key="">${item}</option>
