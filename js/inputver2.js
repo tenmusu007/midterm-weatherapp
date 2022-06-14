@@ -58,6 +58,16 @@ favBtn.addEventListener("click", () => {
         });
     }
 })
+const listFav = document.getElementById("list")
+listFav.addEventListener("change",(event)=>{
+    let selectFav = (event.target.value)
+    gettingData(selectFav).then((item) => {
+        document.getElementById("current-weather-div").innerHTML = renderHtml(item)
+    })
+    gettingDataFor(selectFav).then(() => {
+        // console.log(data);
+    })
+})
 
 const renderOption = (name) => {
     const optionHtml = name.map((item) => {
