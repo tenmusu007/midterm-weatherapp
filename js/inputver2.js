@@ -63,7 +63,7 @@ const renderOption = (name) => {
     const optionHtml = name.map((item) => {
         return(
             `
-            <option value="" key="">${item}</option>
+            <option value="${item}" key="">${item}</option>
             `
             )
     })
