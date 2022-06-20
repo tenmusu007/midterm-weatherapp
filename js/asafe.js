@@ -1,49 +1,31 @@
 import { gettingDataFor } from "./index.js";
 
+const daysCast = []
+const hoursCast = []
 
-
-
-  const sectionDay = document.getElementsByClassName("container-forDay")[0]
-  
-  const forDay = document.createElement("div")
-  sectionDay.append(forDay)
+const sectionDay = document.getElementsByClassName("container-forDay")[0]
+const forDay = document.createElement("div")
+sectionDay.append(forDay)
+const sectionHour = document.getElementsByClassName("container-forHour")[0]
+const forHour = document.createElement("div")
+sectionHour.append(forHour)
 
 function MainDataFunction() {
 
-  const sectionHour = document.getElementsByClassName("container-forHour")[0]
-  
-  const forHour = document.createElement("div")
-  sectionHour.append(forHour)
   
 
 
   gettingDataFor().then((data) => { 
-  //     let fiveDaysArr = []
-  //     // console.log(data)
-  //     const forCast = Array(data).map((item, index)=>{
-  //         console.log(item.list)
-  //         for(let i in item.list){
-  //             if(i % 8 === 0){
-  //             fiveDaysArr.push(item.list[i])
-  //             console.log(fiveDaysArr);
-  //         }
-  //     // return forCast
-  //  }})
       const daysCast = []
       const hoursCast = []   
           
-      // console.log(Number(span) + Number(span * 7));
-      console.log(data.list);
-      for (let i = 0; i < data.list.length ; i += 8) {
+      // console.log(data.list);
+      for (let i = 0; i < data.list.length; i += 8) {
           daysCast.push(data.list[i])
       }
-      // console.log(daysCast)
-    
       for (let i = 0; i < 8; i++) {
           hoursCast.push(data.list[i])
       }
-      // console.log(hoursCast)
-    
     forHour.className = "continer-flex"  
     forDay.className = "continer-flex"  
     forHour.innerHTML = create3hourHtml(hoursCast)
@@ -64,7 +46,7 @@ function MainDataFunction() {
       }); 
 }
 
-const createHtml = (daysCast) => {
+export const createHtml = (daysCast) => {
   // console.log(daysCast)
   const test = daysCast.map((item, index) => {
     // console.log(item);
@@ -92,7 +74,7 @@ const createHtml = (daysCast) => {
 // forDay.className = "continer-flex"
 // forDay.innerHTML = createHtml 
 
-const create3hourHtml = (hoursCast) => {
+export const create3hourHtml = (hoursCast) => {
   // console.log(daysCast)
   const test = hoursCast.map((item, index) => {
     // console.log(item);

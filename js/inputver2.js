@@ -1,4 +1,4 @@
-import { gettingData } from "./index.js";
+import { gettingData, gettingDataFor } from "./index.js";
 import { renderHtml } from './atsu.js'
 export let placeName = "";
 let nameForStrage = "";
@@ -39,10 +39,10 @@ favBtn.addEventListener("click", () => {
             const favOpt = document.createElement("option")
             favOpt.innerHTML = `Fav`
             select.appendChild(favOpt)
-            select.appendChild(option2)
             renderOption(checkLs).forEach(element => {
                 console.log(element);
-                select.innerHTML = `<option value="none" id="Favoption">Fav</option> ${element}`
+                select.innerHTML += `${element}`
+                // select.appendChild(option2)
             });
             localStorage.setItem("favlist", checkLs)
             checkArray = checkLs
@@ -58,14 +58,22 @@ favBtn.addEventListener("click", () => {
         });
     }
 })
+const listFav = document.getElementById("list")
+listFav.addEventListener("change",(event)=>{
+    let selectFav = (event.target.value)
+    gettingData(selectFav).then((item) => {
+        document.getElementById("current-weather-div").innerHTML = renderHtml(item)
+    })
+    gettingDataFor(selectFav).then(() => {
+        // console.log(data);
+    })
+})
 
 const renderOption = (name) => {
-    // console.log(name);
     const optionHtml = name.map((item) => {
-        // console.log(item);
         return(
             `
-            <option value="" key="">${item}</option>
+            <option value="${item}" key="">${item}</option>
             `
             )
     })
@@ -94,6 +102,9 @@ function onPlaceChanged() {
         placeName = place.name.toLowerCase()
         gettingData(placeName).then((item) => {
             document.getElementById("current-weather-div").innerHTML = renderHtml(item)
+        })
+        gettingDataFor(placeName).then(() => {
+            // console.log(data);
         })
     }
 }
