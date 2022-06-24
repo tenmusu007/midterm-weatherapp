@@ -1,14 +1,14 @@
 import { gettingData } from "./index.js";
 
-const conatiner = document.getElementsByClassName("container-current")[0]
+// const conatiner = document.getElementsByClassName("container-current")[0]
+// const conatiner = $('.container-current')
+
 // console.log(conatiner)
 const div = document.createElement("div");
 div.setAttribute("id","current-weather-div")
-conatiner.append(div)
-let currentObj
+$('.container-current').append(div)
 export const renderHtml =(arg)=>{
     const testarray = Array(arg).map((item, index)=>{
-        // console.log(item)
             return (
                 `
                 <div class ="current-box" key =${index}> 
@@ -27,7 +27,6 @@ export const renderHtml =(arg)=>{
                 `
                 )
             })
-    // console.log(testarray);
     return testarray
             
 } 

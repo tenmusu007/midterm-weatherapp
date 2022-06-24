@@ -3,11 +3,11 @@ import { renderHtml } from './atsu.js'
 export let placeName = "";
 let nameForStrage = "";
 let checkArray = []
-const favBtn = document.getElementsByClassName("fav-btn")[0]
-const select = document.getElementsByClassName("fav-list")[0]
+// const favBtn = document.getElementsByClassName("fav-btn")[0]
+// const select = document.getElementsByClassName("fav-list")[0]
 localStorage.setItem("favlist", [])
 const favorite = []
-favBtn.addEventListener("click", () => {
+$('.fav-btn').click(() => {
     let checkLs = localStorage.getItem("favlist")
     const option = document.createElement("option")
     option.setAttribute("id", "test")
@@ -19,7 +19,7 @@ favBtn.addEventListener("click", () => {
             checkArray.push(nameForStrage)
             console.log("Not match");
             console.log("checkArray " + checkArray)
-            select.appendChild(option)
+            $('.fav-list').append(option)
             renderOption(checkArray).forEach(element => {
                 console.log(element);
                 option.innerHTML =  element
@@ -34,15 +34,19 @@ favBtn.addEventListener("click", () => {
                 }
             })
             console.log(checkLs);
-            select.innerHTML = " "
+            $('.fav-list').html(" ")
             const option2 = document.createElement("option")
             const favOpt = document.createElement("option")
             favOpt.innerHTML = `Fav`
-            select.appendChild(favOpt)
+            $('.fav-list').append(favOpt)
             renderOption(checkLs).forEach(element => {
                 console.log(element);
-                select.innerHTML += `${element}`
-                // select.appendChild(option2)
+                // const select = $('.fav-list')
+                // const testDiv = document.createElement("div")
+                // testDiv.innerHTML += `${element}`
+                $('.fav-list').html(`${element}`)
+                // select.innerHTML += `${element}`
+                // $('.fav-list').appendChild(option2)
             });
             localStorage.setItem("favlist", checkLs)
             checkArray = checkLs
@@ -53,8 +57,9 @@ favBtn.addEventListener("click", () => {
         checkArray.push(nameForStrage)
         localStorage.setItem("favlist", checkArray)
         renderOption(checkArray).forEach(element => {
-            select.innerHTML = `<option value="none" id="Favoption">Fav</option>
-            ${element}`
+            console.log("adding");
+            $('.fav-list').html(`<option value="none" id="Favoption">Fav</option>
+            ${element}`)
         });
     }
 })
